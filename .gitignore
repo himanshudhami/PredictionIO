@@ -25,3 +25,9 @@ quickstartapp/
 .idea/
 .templates-cache
 /vendors
+/docs/manual/source/gallery/template-gallery.html.md
+test-reports/
+apache-rat-0.11.jar
+tests/dist
+tests/docker-files/*.jar
+tests/docker-files/*.tgz

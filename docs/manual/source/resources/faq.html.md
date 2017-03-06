@@ -1,6 +1,27 @@
 ---
 title: Frequently Asked Questions
 ---
+
+<!--
+Licensed to the Apache Software Foundation (ASF) under one or more
+contributor license agreements.  See the NOTICE file distributed with
+this work for additional information regarding copyright ownership.
+The ASF licenses this file to You under the Apache License, Version 2.0
+(the "License"); you may not use this file except in compliance with
+the License.  You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+-->
+
+If you have questions that are not resolved below, you can subscribe and post to
+the user mailing list. You can follow the instructions [here](/support).
+
 ## Using PredictionIO
 
 ### Q: How do I check to see if various dependencies, such as ElasticSearch and HBase, are running?
@@ -160,11 +181,11 @@ $ pio deploy -- --driver-memory 8G
 
 ## Building PredictionIO
 
-### Q: How to resolve "Error: Could not find or load main class io.prediction.tools.Console" after ./make_distribution.sh?
+### Q: How to resolve "Error: Could not find or load main class org.apache.predictionio.tools.Console" after ./make_distribution.sh?
 
 ```
 $ bin/pio app
-Error: Could not find or load main class io.prediction.tools.Console
+Error: Could not find or load main class org.apache.predictionio.tools.Console
 ```
 
 When PredictionIO bumps a version, it creates another JAR file with the new
@@ -212,7 +233,3 @@ there could be a chance that reverse DNS does not function properly. You can
 install a DNS server on your own computer. Some users have reported that using
 [Google Public DNS](https://developers.google.com/speed/public-dns/) would also
 solve the problem.
-
-If you have other questions, you can search or post on the [user
-group](https://groups.google.com/forum/#!forum/predictionio-user) or [email the
-core team](mailto:support@prediction.io) directly.

@@ -1,3 +1,20 @@
+<!--
+Licensed to the Apache Software Foundation (ASF) under one or more
+contributor license agreements.  See the NOTICE file distributed with
+this work for additional information regarding copyright ownership.
+The ASF licenses this file to You under the Apache License, Version 2.0
+(the "License"); you may not use this file except in compliance with
+the License.  You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+-->
+
 Parallel SimRank Algorithm
 ========================================================================
 Uses the Delta-Simrank Algorithm (http://dprg.cs.uiuc.edu/docs/deltasimrank/simrank.pdf).
@@ -14,7 +31,7 @@ Prerequisite: GraphX package.
 
 Parameter Explained
 -------------------
-datasource - graphEdgelistPath : The edge-list passed to GraphX's graph loader. For efficient memory storage of intermediate SimRank score calculations, the vertex ids should be in a contiguous range from 0 to (#Vertex-1). There is a utility function for re-mapping the vertex Id values : io.prediction.examples.pfriendrecommendation.DeltaSimRankRDD.normalizeGraph. 
+datasource - graphEdgelistPath : The edge-list passed to GraphX's graph loader. For efficient memory storage of intermediate SimRank score calculations, the vertex ids should be in a contiguous range from 0 to (#Vertex-1). There is a utility function for re-mapping the vertex Id values : org.apache.predictionio.examples.pfriendrecommendation.DeltaSimRankRDD.normalizeGraph. 
 
 The provided DataSource class uses the GraphLoader provided by GraphX. Graphs can be specified by a tab-separated edge list, where each line specifies one edge.
 The the user can refer to the provided example edge list at `$EXAMPLE_HOME/data/edge_list_small.txt` for a graph specification with 10 vertices and 20 edges.

@@ -2,11 +2,28 @@
 title: Filter Recommended Items by Blacklist in Query (Recommendation)
 ---
 
+<!--
+Licensed to the Apache Software Foundation (ASF) under one or more
+contributor license agreements.  See the NOTICE file distributed with
+this work for additional information regarding copyright ownership.
+The ASF licenses this file to You under the Apache License, Version 2.0
+(the "License"); you may not use this file except in compliance with
+the License.  You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+-->
+
 Let's say you want to supply a backList for each query to exclude some items from recommendation (For example, in the browsing session, the user just added some items to shopping cart, or you have a list of items you want to filter out, you may want to supply blackList in Query). This how-to will demonstrate how you can do it.
 
-Note that you may also use [E-Commerce Recommendation Template](http://templates.prediction.io/PredictionIO/template-scala-parallel-ecommercerecommendation) which supports this feature by default.
+Note that you may also use [E-Commerce Recommendation Template](/gallery/template-gallery#recommender-systems) which supports this feature by default.
 
-If you are looking for filtering out items based on the specific user-to-item events logged by EventServer (eg. filter all items which the user has "buy" events on), you can use the [E-Commerce Recommendation Template](http://templates.prediction.io/PredictionIO/template-scala-parallel-ecommercerecommendation). Please refer to the algorithm parameters "unseenOnly" and "seenEvents" of the E-Commerce Recommenation Template.
+If you are looking for filtering out items based on the specific user-to-item events logged by EventServer (eg. filter all items which the user has "buy" events on), you can use the [E-Commerce Recommendation Template](/gallery/template-gallery#recommender-systems). Please refer to the algorithm parameters "unseenOnly" and "seenEvents" of the E-Commerce Recommenation Template.
 
 ## Add Query Parameter
 

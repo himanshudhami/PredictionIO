@@ -1,19 +1,36 @@
-package io.prediction.examples.mlc
+/*
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the "License"); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ *
+ *    http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
-import io.prediction.engines.itemrec.ItemRecEngine
-import io.prediction.engines.itemrec.EventsDataSourceParams
-import io.prediction.engines.itemrec.PreparatorParams
-import io.prediction.engines.itemrec.NCItemBasedAlgorithmParams
-import io.prediction.engines.itemrec.EvalParams
-import io.prediction.engines.itemrec.ItemRecEvaluator
-import io.prediction.engines.itemrec.ItemRecEvaluatorParams
-import io.prediction.engines.itemrec.MeasureType
-import io.prediction.engines.base.EventsSlidingEvalParams
-import io.prediction.engines.base.BinaryRatingParams
+package org.apache.predictionio.examples.mlc
 
-import io.prediction.controller.EngineParams
-import io.prediction.controller.Workflow
-import io.prediction.controller.WorkflowParams
+import org.apache.predictionio.engines.itemrec.ItemRecEngine
+import org.apache.predictionio.engines.itemrec.EventsDataSourceParams
+import org.apache.predictionio.engines.itemrec.PreparatorParams
+import org.apache.predictionio.engines.itemrec.NCItemBasedAlgorithmParams
+import org.apache.predictionio.engines.itemrec.EvalParams
+import org.apache.predictionio.engines.itemrec.ItemRecEvaluator
+import org.apache.predictionio.engines.itemrec.ItemRecEvaluatorParams
+import org.apache.predictionio.engines.itemrec.MeasureType
+import org.apache.predictionio.engines.base.EventsSlidingEvalParams
+import org.apache.predictionio.engines.base.BinaryRatingParams
+
+import org.apache.predictionio.controller.EngineParams
+import org.apache.predictionio.controller.Workflow
+import org.apache.predictionio.controller.WorkflowParams
 
 import com.github.nscala_time.time.Imports._
 

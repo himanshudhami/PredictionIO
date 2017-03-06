@@ -1,3 +1,20 @@
+<!--
+Licensed to the Apache Software Foundation (ASF) under one or more
+contributor license agreements.  See the NOTICE file distributed with
+this work for additional information regarding copyright ownership.
+The ASF licenses this file to You under the Apache License, Version 2.0
+(the "License"); you may not use this file except in compliance with
+the License.  You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+-->
+
 # Using predictionIO to run predictions using Yahoo Finance
 
 This tutorial assumes you have gone through the quickstart guide for
@@ -55,7 +72,7 @@ Go to PredictionIO/examples/scala-stock
 
 Now type:
 ```
-../../bin/pio run --asm io.prediction.examples.stock.YahooDataSourceRun -- --master <Your spark master address found at http:local8080> --driver-memory <4-12G>
+../../bin/pio run --asm org.apache.predictionio.examples.stock.YahooDataSourceRun -- --master <Your spark master address found at http:local8080> --driver-memory <4-12G>
 ```
 ### Step 7: Open dashboard and view results
 In PredictionIO folder
@@ -167,7 +184,7 @@ where `$PIO_HOME` is the root directory of PredictionIO's code tree.
 
 Run the fetch script.
 ```
-$ ../sbt/sbt "runMain io.prediction.examples.stock.FetchMain"
+$ ../sbt/sbt "runMain org.apache.predictionio.examples.stock.FetchMain"
 ```
 As SP500 constituents change all the time, the hardcoded list may not reflect
 the current state and the script may fail to extract delisted tickers. Whilst
@@ -314,7 +331,7 @@ evaluation, you have to specify two sets of parameters:
 You can run the evaluation with the following command.
 ```
 $ cd $PIO_HOME/examples
-$ ../bin/pio-run io.prediction.examples.stock.Demo1
+$ ../bin/pio-run org.apache.predictionio.examples.stock.Demo1
 ```
 
 You should see that we are trading from April 2005 until Dec 2007, the NAV went
@@ -334,7 +351,7 @@ backtesting class essentially divides the current NAV by the `maxPositions`. The
 demo is run the same way, by specifying the running main class.
 ```
 $ cd $PIO_HOME/examples
-$ ../bin/pio-run io.prediction.examples.stock.Demo2
+$ ../bin/pio-run org.apache.predictionio.examples.stock.Demo2
 ```
 
 The result is not as great, of course.
@@ -351,7 +368,7 @@ All you need is to change the `metrics` variable to `DailyMetrics`.
 [Demo3](Demo3.scala) shows the actual code. Try it out with:
 ```
 $ cd $PIO_HOME/examples
-$ ../bin/pio-run io.prediction.examples.stock.Demo3
+$ ../bin/pio-run org.apache.predictionio.examples.stock.Demo3
 ```
 
 ### Last Words

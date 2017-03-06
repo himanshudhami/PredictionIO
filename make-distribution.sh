@@ -1,18 +1,21 @@
 #!/usr/bin/env bash
 
-# Copyright 2015 TappingStone, Inc.
 #
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
+# Licensed to the Apache Software Foundation (ASF) under one or more
+# contributor license agreements.  See the NOTICE file distributed with
+# this work for additional information regarding copyright ownership.
+# The ASF licenses this file to You under the Apache License, Version 2.0
+# (the "License"); you may not use this file except in compliance with
+# the License.  You may obtain a copy of the License at
 #
-#     http://www.apache.org/licenses/LICENSE-2.0
+#    http://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+#
 
 set -e
 
@@ -24,7 +27,7 @@ VERSION=$(grep version ${FWDIR}/build.sbt | grep ThisBuild | grep -o '".*"' | se
 echo "Building binary distribution for PredictionIO $VERSION..."
 
 cd ${FWDIR}
-sbt/sbt common/publishLocal core/publishLocal data/publishLocal e2/publishLocal tools/assembly
+sbt/sbt common/publishLocal data/publishLocal core/publishLocal e2/publishLocal tools/assembly
 
 cd ${FWDIR}
 rm -rf ${DISTDIR}
@@ -38,7 +41,6 @@ cp ${FWDIR}/bin/* ${DISTDIR}/bin || :
 cp ${FWDIR}/conf/* ${DISTDIR}/conf
 cp ${FWDIR}/project/build.properties ${DISTDIR}/project
 cp ${FWDIR}/sbt/sbt ${DISTDIR}/sbt
-cp ${FWDIR}/sbt/sbt-launch-lib.bash ${DISTDIR}/sbt
 cp ${FWDIR}/assembly/*assembly*jar ${DISTDIR}/lib
 
 rm -f ${DISTDIR}/lib/*javadoc.jar

@@ -1,3 +1,20 @@
+<!--
+Licensed to the Apache Software Foundation (ASF) under one or more
+contributor license agreements.  See the NOTICE file distributed with
+this work for additional information regarding copyright ownership.
+The ASF licenses this file to You under the Apache License, Version 2.0
+(the "License"); you may not use this file except in compliance with
+the License.  You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+-->
+
 Linear Regression Engine
 ========================
 
@@ -86,10 +103,10 @@ Running Evaluation Metrics
 To run evaluation metrics, use the following command.
 ```
 $ cd $PIO_HOME/examples/scala-local-regression
-$ ../../bin/pio eval --metrics-class io.prediction.controller.MeanSquareError
+$ ../../bin/pio eval --metrics-class org.apache.predictionio.controller.MeanSquareError
 ```
 Notice the extra required argument `--metrics-class
-io.prediction.controller.MeanSquareError` for the `eval` command. This instructs
+org.apache.predictionio.controller.MeanSquareError` for the `eval` command. This instructs
 PredictionIO to run the specified metrics during evaluation. When you look at
 the console output again, you should be able to see a mean square error
 computed, like the following.

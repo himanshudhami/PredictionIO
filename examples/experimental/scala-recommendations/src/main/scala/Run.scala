@@ -1,17 +1,34 @@
+/*
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the "License"); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ *
+ *    http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package org.apache.spark.mllib.recommendation.engine
 
-import io.prediction.controller.Engine
-import io.prediction.controller.IEngineFactory
-import io.prediction.controller.IPersistentModel
-import io.prediction.controller.IPersistentModelLoader
-import io.prediction.controller.PDataSource
-import io.prediction.controller.Params
-import io.prediction.controller.PAlgorithm
-import io.prediction.controller.PIdentityPreparator
-import io.prediction.controller.LFirstServing
-import io.prediction.controller.Utils
-import io.prediction.controller.Workflow
-import io.prediction.controller.WorkflowParams
+import org.apache.predictionio.controller.Engine
+import org.apache.predictionio.controller.IEngineFactory
+import org.apache.predictionio.controller.IPersistentModel
+import org.apache.predictionio.controller.IPersistentModelLoader
+import org.apache.predictionio.controller.PDataSource
+import org.apache.predictionio.controller.Params
+import org.apache.predictionio.controller.PAlgorithm
+import org.apache.predictionio.controller.PIdentityPreparator
+import org.apache.predictionio.controller.LFirstServing
+import org.apache.predictionio.controller.Utils
+import org.apache.predictionio.controller.Workflow
+import org.apache.predictionio.controller.WorkflowParams
 
 import org.apache.commons.io.FileUtils
 import org.apache.spark.SparkContext
