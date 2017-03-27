@@ -65,14 +65,6 @@ object Common extends EitherLogging {
     }
   }
 
-  def versionNoPatch(fullVersion: String): String = {
-    val v = """^(\d+\.\d+)""".r
-    val versionNoPatch = for {
-      v(np) <- v findFirstIn fullVersion
-    } yield np
-    versionNoPatch.getOrElse(fullVersion)
-  }
-
   def getEngineDirPath(directory: Option[String]): String = {
     new File(directory.getOrElse(".")).getCanonicalPath
   }
@@ -95,11 +87,17 @@ object Common extends EitherLogging {
     val engineDir = getEngineDirPath(Some(directory))
     val libFiles = jarFilesForScalaFilter(
       jarFilesAt(new File(engineDir, "lib")))
-    val scalaVersionNoPatch = Common.versionNoPatch(BuildInfo.scalaVersion)
     val targetFiles = jarFilesForScalaFilter(jarFilesAt(new File(engineDir,
-      "target" + File.separator + s"scala-${scalaVersionNoPatch}")))
+      "target" + File.separator + s"scala-${BuildInfo.scalaBinaryVersion}")))
     // Use libFiles is target is empty.
     if (targetFiles.size > 0) targetFiles else libFiles
+  }
+
+  def jarFilesForSpark(pioHome: String): Array[File] = {
+    def jarFilesAt(path: File): Array[File] = path.listFiles filter {
+      _.getName.toLowerCase.endsWith(".jar")
+    }
+    jarFilesAt(new File(pioHome, "lib/spark"))
   }
 
   def coreAssembly(pioHome: String): Expected[File] = {

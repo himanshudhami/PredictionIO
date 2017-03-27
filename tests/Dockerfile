@@ -17,19 +17,36 @@
 
 FROM predictionio/pio
 
-ENV SPARK_VERSION 1.4.0
-ENV ELASTICSEARCH_VERSION 1.4.4
-ENV HBASE_VERSION 1.0.0
+ARG SPARK_ARCHIVE
+ARG SPARK_DIR
+ARG PGSQL_JAR
+ARG PIO_SCALA_VERSION
+ARG PIO_SPARK_VERSION
+ARG PIO_HADOOP_VERSION
+ARG PIO_ELASTICSEARCH_VERSION
 
-ADD docker-files/spark-${SPARK_VERSION}-bin-hadoop2.6.tgz /vendors
-ENV SPARK_HOME /vendors/spark-${SPARK_VERSION}-bin-hadoop2.6
+ENV PIO_SCALA_VERSION=$PIO_SCALA_VERSION
+ENV PIO_SPARK_VERSION=$PIO_SPARK_VERSION
+ENV PIO_HADOOP_VERSION=$PIO_HADOOP_VERSION
+ENV PIO_ELASTICSEARCH_VERSION=$PIO_ELASTICSEARCH_VERSION
 
-COPY docker-files/postgresql-9.4-1204.jdbc41.jar /drivers/postgresql-9.4-1204.jdbc41.jar
+ENV PGSQL_JAR=$PGSQL_JAR
+
+# WORKAROUND: es-hadoop stops on RDD#take(1)
+ADD docker-files/${SPARK_ARCHIVE} /vendors
+RUN echo "spark.locality.wait.node 0s" > /vendors/${SPARK_DIR}/conf/spark-defaults.conf
+ENV SPARK_HOME /vendors/${SPARK_DIR}
+
+COPY docker-files/${PGSQL_JAR} /drivers/${PGSQL_JAR}
 COPY docker-files/init.sh init.sh
 COPY docker-files/env-conf/hbase-site.xml ${PIO_HOME}/conf/hbase-site.xml
 COPY docker-files/env-conf/pio-env.sh ${PIO_HOME}/conf/pio-env.sh
 COPY docker-files/pgpass /root/.pgpass
 RUN chmod 600 /root/.pgpass
+
+# Python
+RUN pip install python-dateutil
+RUN pip install pytz
 
 # Default repositories setup
 ENV PIO_STORAGE_REPOSITORIES_METADATA_SOURCE PGSQL

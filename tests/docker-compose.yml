@@ -16,7 +16,10 @@
 version: "2"
 services:
   elasticsearch:
-    image: elasticsearch:1-alpine
+    image: ${ES_IMAGE}:${ES_TAG}
+    environment:
+      - xpack.security.enabled=false
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
   hbase:
     image: harisekhon/hbase:1.0
   postgres:

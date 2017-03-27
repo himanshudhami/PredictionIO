@@ -19,22 +19,56 @@
 
 set -e
 
+usage ()
+{
+    echo "Usage: $0 [-h|--help]"
+    echo ""
+    echo "  -h|--help    Show usage"
+}
+
+JAVA_PROPS=()
+
+for i in "$@"
+do
+case $i in
+    -h|--help)
+    usage
+    shift
+    exit
+    ;;
+    -D*)
+    JAVA_PROPS+=("$i")
+    shift
+    ;;
+    *)
+    usage
+    exit 1
+    ;;
+esac
+done
+
 FWDIR="$(cd `dirname $0`; pwd)"
 DISTDIR="${FWDIR}/dist"
 
-VERSION=$(grep version ${FWDIR}/build.sbt | grep ThisBuild | grep -o '".*"' | sed 's/"//g')
+VERSION=$(grep ^version ${FWDIR}/build.sbt | grep ThisBuild | grep -o '".*"' | sed 's/"//g')
 
 echo "Building binary distribution for PredictionIO $VERSION..."
 
 cd ${FWDIR}
-sbt/sbt common/publishLocal data/publishLocal core/publishLocal e2/publishLocal tools/assembly
+set -x
+sbt/sbt "${JAVA_PROPS[@]}" clean
+sbt/sbt "${JAVA_PROPS[@]}" printBuildInfo
+sbt/sbt "${JAVA_PROPS[@]}" publishLocal assembly storage/assembly
+set +x
 
 cd ${FWDIR}
 rm -rf ${DISTDIR}
 mkdir -p ${DISTDIR}/bin
 mkdir -p ${DISTDIR}/conf
 mkdir -p ${DISTDIR}/lib
+mkdir -p ${DISTDIR}/lib/spark
 mkdir -p ${DISTDIR}/project
+
 mkdir -p ${DISTDIR}/sbt
 
 cp ${FWDIR}/bin/* ${DISTDIR}/bin || :
@@ -42,6 +76,7 @@ cp ${FWDIR}/conf/* ${DISTDIR}/conf
 cp ${FWDIR}/project/build.properties ${DISTDIR}/project
 cp ${FWDIR}/sbt/sbt ${DISTDIR}/sbt
 cp ${FWDIR}/assembly/*assembly*jar ${DISTDIR}/lib
+cp ${FWDIR}/assembly/spark/*jar ${DISTDIR}/lib/spark
 
 rm -f ${DISTDIR}/lib/*javadoc.jar
 rm -f ${DISTDIR}/lib/*sources.jar

@@ -19,7 +19,7 @@
 USAGE=$"Usage: run_docker <meta> <event> <model> <command>
   Where:
     meta         = [PGSQL,ELASTICSEARCH]
-    event        = [PGSQL,HBASE]
+    event        = [PGSQL,HBASE,ELASTICSEARCH]
     model        = [PGSQL,LOCALFS,HDFS]
     command      = command to run in the container"
 
@@ -30,7 +30,7 @@ fi
 META="$1"
 shift
 
-if ! [[ "$1" =~ ^(PGSQL|HBASE)$ ]]; then
+if ! [[ "$1" =~ ^(PGSQL|HBASE|ELASTICSEARCH)$ ]]; then
   echo "$USAGE"
   exit 1
 fi
@@ -45,6 +45,8 @@ MODEL="$1"
 shift
 
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+source $DIR/../conf/pio-vendors.sh
 
 docker-compose -f $DIR/docker-compose.yml run \
   -e PIO_STORAGE_REPOSITORIES_METADATA_SOURCE=$META \
