@@ -21,6 +21,8 @@ name := "apache-predictionio-data-elasticsearch"
 
 elasticsearchSparkArtifact := (if (majorVersion(sparkVersion.value) == 2) "elasticsearch-spark-20" else "elasticsearch-spark-13")
 
+elasticsearchVersion := (if (majorVersion(elasticsearchVersion.value) < 5) "5.2.2" else elasticsearchVersion.value)
+
 libraryDependencies ++= Seq(
   "org.apache.predictionio" %% "apache-predictionio-core" % version.value % "provided",
   "org.apache.spark"        %% "spark-core"               % sparkVersion.value % "provided",
@@ -44,4 +46,5 @@ assemblyShadeRules in assembly := Seq(
 test in assembly := {}
 
 assemblyOutputPath in assembly := baseDirectory.value.getAbsoluteFile.getParentFile.getParentFile /
-  "assembly" / "spark" / s"pio-data-elasticsearch-assembly-${version.value}.jar"
+  "assembly" / "src" / "universal" / "lib" / "spark" /
+  s"pio-data-elasticsearch-assembly-${version.value}.jar"

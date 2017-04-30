@@ -31,12 +31,9 @@ pomExtra := childrenPomExtra.value
 
 assemblyOption in assembly := (assemblyOption in assembly).value.copy(includeScala = false)
 
-assemblyOption in assembly := (assemblyOption in assembly).value.copy(
-  includeScala = false,
-  excludedJars = (fullClasspath in assembly).value.filter {_.data.getName startsWith "apache-predictionio"})
-
 // skip test in assembly
 test in assembly := {}
 
 assemblyOutputPath in assembly := baseDirectory.value.getAbsoluteFile.getParentFile.getParentFile /
-  "assembly" / "spark" / ("pio-data-hdfs-assembly-" + version.value + ".jar")
+  "assembly" / "src" / "universal" / "lib" / "spark" /
+  ("pio-data-hdfs-assembly-" + version.value + ".jar")

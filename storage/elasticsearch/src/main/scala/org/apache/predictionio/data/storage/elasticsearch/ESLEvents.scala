@@ -60,7 +60,9 @@ class ESLEvents(val client: ESClient, config: StorageClientConfig, val index: St
     val estype = getEsType(appId, channelId)
     val restClient = client.open()
     try {
-      ESUtils.createIndex(restClient, index)
+      ESUtils.createIndex(restClient, index,
+        ESUtils.getNumberOfShards(config, index.toUpperCase),
+        ESUtils.getNumberOfReplicas(config, index.toUpperCase))
       val json =
         (estype ->
           ("_all" -> ("enabled" -> 0)) ~
@@ -72,7 +74,7 @@ class ESLEvents(val client: ESClient, config: StorageClientConfig, val index: St
             ("entityId" -> ("type" -> "keyword")) ~
             ("targetEntityType" -> ("type" -> "keyword")) ~
             ("targetEntityId" -> ("type" -> "keyword")) ~
-            ("properties" -> ("type" -> "keyword")) ~
+            ("properties" -> ("enabled" -> 0)) ~
             ("eventTime" -> ("type" -> "date")) ~
             ("tags" -> ("type" -> "keyword")) ~
             ("prId" -> ("type" -> "keyword")) ~
@@ -95,7 +97,7 @@ class ESLEvents(val client: ESClient, config: StorageClientConfig, val index: St
       restClient.performRequest(
         "POST",
         s"/$index/$estype/_delete_by_query",
-        Map("refresh" -> "true").asJava,
+        Map("refresh" -> ESUtils.getEventDataRefresh(config)).asJava,
         entity).getStatusLine.getStatusCode match {
           case 200 => true
           case _ =>
@@ -144,7 +146,7 @@ class ESLEvents(val client: ESClient, config: StorageClientConfig, val index: St
         val response = restClient.performRequest(
           "POST",
           s"/$index/$estype/$id",
-          Map("refresh" -> "true").asJava,
+          Map("refresh" -> ESUtils.getEventDataRefresh(config)).asJava,
           entity)
         val jsonResponse = parse(EntityUtils.toString(response.getEntity))
         val result = (jsonResponse \ "result").extract[String]
@@ -240,7 +242,7 @@ class ESLEvents(val client: ESClient, config: StorageClientConfig, val index: St
         val response = restClient.performRequest(
           "POST",
           s"/$index/$estype/_delete_by_query",
-          Map("refresh" -> "true").asJava)
+          Map("refresh" -> ESUtils.getEventDataRefresh(config)).asJava)
         val jsonResponse = parse(EntityUtils.toString(response.getEntity))
         val result = (jsonResponse \ "result").extract[String]
         result match {
